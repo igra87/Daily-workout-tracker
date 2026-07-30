@@ -1,0 +1,264 @@
+:root {
+  --bg: #f7f7f8;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #666666;
+  --accent: #2563eb;
+  --accent-text: #ffffff;
+  --border: #e2e2e5;
+  --success: #16a34a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121214;
+    --card-bg: #1c1c1f;
+    --text: #f2f2f2;
+    --muted: #a0a0a5;
+    --accent: #3b82f6;
+    --accent-text: #ffffff;
+    --border: #2e2e33;
+    --success: #4ade80;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 60px;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+nav.topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav.topnav .brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+nav.topnav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+header.day-header {
+  margin: 20px 0 16px;
+}
+
+header.day-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+}
+
+header.day-header .session-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.note {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.exercise-card {
+  display: flex;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+.exercise-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.exercise-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.exercise-body h3 {
+  margin: 0 0 2px;
+  font-size: 1.02rem;
+}
+
+.exercise-target {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+}
+
+.exercise-inputs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 110px;
+}
+
+.field label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.field input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.rest-card {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.rest-card .exercise-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 10px;
+}
+
+.save-bar {
+  position: sticky;
+  bottom: 0;
+  padding: 14px 0;
+  background: var(--bg);
+}
+
+button.save-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+button.save-btn:active {
+  opacity: 0.85;
+}
+
+.status-msg {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.status-msg.success { color: var(--success); }
+.status-msg.error { color: #dc2626; }
+
+.setup-warning {
+  background: #fef3c7;
+  color: #7c5e10;
+  border: 1px solid #f5d67e;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .setup-warning {
+    background: #3a2f10;
+    color: #f5d67e;
+    border-color: #6b551c;
+  }
+}
+
+table.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.88rem;
+}
+
+table.history-table th, table.history-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+table.history-table th {
+  background: var(--bg);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.history-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button.csv-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 0;
+}

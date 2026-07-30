@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Workout History</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="topnav">
+    <span class="brand">🏋️ Daily Workout</span>
+    <a href="index.html">← Today</a>
+  </nav>
+
+  <main class="container">
+    <div id="setup-warning" class="setup-warning" style="display:none">
+      Setup needed: this app can't load your history yet because
+      <code>js/config.js</code> still has placeholder Supabase values.
+      See the README for the quick setup steps.
+    </div>
+
+    <header class="day-header">
+      <h1>History</h1>
+      <div class="session-meta">Everything you've logged, most recent first</div>
+    </header>
+
+    <div class="history-controls">
+      <span id="entry-count" class="session-meta"></span>
+      <button class="csv-btn" id="csv-btn">Download CSV</button>
+    </div>
+
+    <div id="history-content"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>
