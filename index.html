@@ -29,6 +29,19 @@
       <div class="note" id="session-note"></div>
     </header>
 
+    <div class="timer-card">
+      <div class="timer-readout">
+        <div class="timer-display" id="timer-display">00:00</div>
+        <div class="timer-label" id="timer-label">Ready</div>
+      </div>
+      <div class="timer-buttons">
+        <button type="button" class="timer-btn" id="timer-stopwatch-btn">Start</button>
+        <button type="button" class="timer-btn" id="timer-20-btn">20s</button>
+        <button type="button" class="timer-btn" id="timer-10-btn">10s</button>
+        <button type="button" class="timer-btn timer-reset" id="timer-reset-btn" title="Reset">⟲</button>
+      </div>
+    </div>
+
     <div id="exercise-list"></div>
 
     <div class="save-bar" id="save-bar" style="display:none">
@@ -42,6 +55,7 @@
   <script src="js/exercise-library.js"></script>
   <script src="js/plan.js"></script>
   <script src="js/schedule-store.js"></script>
+  <script src="js/timer.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

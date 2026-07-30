@@ -97,6 +97,11 @@ Both take a few minutes and only need to be done once.
   value; tap "Show data table" for the plain numbers underneath.
 - Tap **Plan** at the top to review or change your weekly schedule — see
   below.
+- The timer near the top of the Today page stays visible as you scroll.
+  Tap **Start**/**Stop** to time a hold (e.g. a plank) and read off the
+  elapsed time to log; tap **20s** or **10s** for a Tabata-style countdown
+  that flashes and beeps when it hits zero (tap the same button again to
+  cancel it early, or **⟲** to reset).
 
 ### Editing your weekly plan
 
