@@ -9,9 +9,16 @@ free on **GitHub Pages**. Your logged entries are saved in a free online
 database called **Supabase**, since GitHub Pages on its own can only serve
 files — it can't save anything you type into it.
 
-There are two one-time setup steps before the app can save your data:
-**(1) create a free Supabase project**, and **(2) turn on GitHub Pages**.
-Both take a few minutes and only need to be done once.
+The app supports multiple people sharing one link — each person signs up
+with their own email/password and only ever sees their own schedule and
+logs, never anyone else's.
+
+There are four one-time setup steps: **(1) create a free Supabase
+project**, **(2) turn on GitHub Pages**, **(3) turn on accounts/logins**,
+and **(4) a short one-time migration** so your existing data ends up owned
+by your new account. All take a few minutes and only need to be done once
+— after that, sharing the link with a friend is as simple as them signing
+up.
 
 ---
 
@@ -76,10 +83,56 @@ Both take a few minutes and only need to be done once.
    `https://igra87.github.io/daily-workout-tracker/`
 6. Open that link on your phone or laptop and bookmark it. That's your app.
 
+## Step 4 — Turn on accounts, so you and friends each get your own data
+
+The app uses simple email + password logins (no separate email step) so
+anyone with the link can sign up and get their own private schedule and
+logs. This needs one Supabase setting changed, plus a short one-time
+migration so your *existing* data (from before accounts existed) ends up
+correctly owned by your account rather than orphaned. Follow these in
+order:
+
+1. In Supabase, go to **Authentication** in the left sidebar, then find the
+   **Email** provider's settings (under **Providers**, or under
+   **Sign In / Providers** depending on your dashboard version) and turn
+   **off** the **"Confirm email"** option. This lets sign-ups work
+   instantly, with no confirmation email needed — handy for a small group
+   of friends, and it sidesteps Supabase's free-tier limits on how many
+   emails it can send per hour.
+2. Back in the **SQL Editor**, open **`supabase/schema_v3a_auth_columns.sql`**
+   from this repo, copy it in, and click **Run**. This adds an "owner"
+   column to your two tables, without breaking anything yet.
+3. Make sure you've pulled/deployed the latest version of this app (the
+   one with the **Log in** page). Open your app link — you'll be sent to a
+   login screen.
+4. Click **Sign up**, and create your own account with your email and a
+   password of your choosing. You'll land on the Today page, but it'll look
+   like a fresh start (default plan, empty history) — that's expected and
+   temporary; your original data is still safe in the database, just not
+   linked to your new account yet.
+5. In Supabase, go to **Authentication → Users**. Find your email in the
+   list and copy its **UID** (a long string of letters/numbers/dashes).
+6. Open **`supabase/schema_v3b_auth_policies.sql`** from this repo. Replace
+   every `YOUR_USER_ID_HERE` with the UID you just copied (keep the quote
+   marks around it), then paste the whole thing into a new query in the
+   SQL Editor and click **Run**. This links your existing logs/schedule to
+   your account, and locks the database down so every user can only ever
+   see and change their own rows — never anyone else's.
+7. Refresh the app — your original history and schedule should now show up
+   normally under your logged-in account.
+
+From now on, sharing the app is just sharing the link: each friend opens
+it, taps **Sign up**, and gets their own private schedule and history.
+There's a **Log out** link in the top-right of every page.
+
 ---
 
 ## Using the app
 
+- The first time (per device/browser), you'll be asked to log in or sign
+  up with an email and password. After that you stay signed in; use
+  **Log out** in the top-right of any page to switch accounts (e.g. to
+  test what a friend would see).
 - Open the link any day — it automatically shows that day's session based
   on the weekly plan, with a simple diagram and target sets/reps for each
   exercise.
@@ -127,9 +180,10 @@ Nothing here affects the Today page until you tap **Save schedule**.
 
 ## Costs
 
-Both GitHub Pages and Supabase's free tier are enough for this app
-(Supabase's free tier covers far more storage and traffic than one
-person's workout log will ever use). No credit card is required for either.
+GitHub Pages and Supabase's free tier (including accounts/logins) are
+enough for this app — Supabase's free tier covers far more storage,
+traffic, and monthly active users than a small group of friends will ever
+use. No credit card is required for either.
 
 ## Making changes later
 

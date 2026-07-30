@@ -1,5 +1,4 @@
-(function () {
-  const isConfigured = SUPABASE_URL !== "YOUR_SUPABASE_URL" && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
+(async function () {
   const chartArea = document.getElementById("chart-area");
   const select = document.getElementById("exercise-select");
 
@@ -9,8 +8,8 @@
     select.disabled = true;
     return;
   }
+  if (!(await requireAuth())) return;
 
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   let allRows = [];
 
   function escapeHtml(str) {

@@ -1,5 +1,4 @@
-(function () {
-  const isConfigured = SUPABASE_URL !== "YOUR_SUPABASE_URL" && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
+(async function () {
   const contentEl = document.getElementById("history-content");
   const countEl = document.getElementById("entry-count");
   const csvBtn = document.getElementById("csv-btn");
@@ -10,8 +9,8 @@
     contentEl.innerHTML = `<div class="empty-state">No data source configured yet.</div>`;
     return;
   }
+  if (!(await requireAuth())) return;
 
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   let rows = [];
 
   function escapeHtml(str) {

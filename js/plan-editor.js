@@ -1,6 +1,4 @@
 (function () {
-  const isConfigured = SUPABASE_URL !== "YOUR_SUPABASE_URL" && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
-  const db = isConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
   const ORDERED_DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
   const editorEl = document.getElementById("schedule-editor");
@@ -178,12 +176,16 @@
   });
 
   (async () => {
-    schedule = isConfigured ? await loadWeeklySchedule(db) : getDefaultWeeklySchedule();
-    render();
-    if (isConfigured) {
-      document.getElementById("save-bar").style.display = "block";
-    } else {
+    if (!isConfigured) {
+      schedule = getDefaultWeeklySchedule();
+      render();
       document.getElementById("setup-warning").style.display = "block";
+      return;
     }
+    if (!(await requireAuth())) return;
+
+    schedule = await loadWeeklySchedule(db);
+    render();
+    document.getElementById("save-bar").style.display = "block";
   })();
 })();

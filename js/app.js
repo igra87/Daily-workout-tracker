@@ -1,9 +1,8 @@
 (async function () {
-  const isConfigured = SUPABASE_URL !== "YOUR_SUPABASE_URL" && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
-  const db = isConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
   if (!isConfigured) {
     document.getElementById("setup-warning").style.display = "block";
+  } else if (!(await requireAuth())) {
+    return; // requireAuth() is already redirecting to the login page
   }
 
   function escapeHtml(str) {
