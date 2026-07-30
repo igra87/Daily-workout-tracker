@@ -30,7 +30,13 @@ Both take a few minutes and only need to be done once.
 5. Click **Run** (or press Ctrl/Cmd+Enter). This creates the table that will
    store your logged workouts, and sets rules so the app can only add and
    read entries — never delete or overwrite anything.
-6. Now click the **Settings** (gear icon) in the left sidebar, then **API**.
+6. Click **New query** again, open the file **`supabase/schema_v2_schedule.sql`**
+   from this repository, copy its contents, paste them in, and click **Run**.
+   This creates a second table that stores your editable weekly plan (used by
+   the **Plan** tab). This one *does* allow the app to update rows — that's
+   needed so your schedule edits can be saved — but it's a separate table
+   from your workout logs above, which stay insert/read-only.
+7. Now click the **Settings** (gear icon) in the left sidebar, then **API**.
    You'll see two values you need:
    - **Project URL** — looks like `https://xxxxxxxxxxxx.supabase.co`
    - **anon public** key — a long string of letters/numbers
@@ -89,14 +95,30 @@ Both take a few minutes and only need to be done once.
   graph of that exercise's logged values over time (e.g. weight for Leg
   press, time held for Plank). Hover/tap a point for the exact date and
   value; tap "Show data table" for the plain numbers underneath.
+- Tap **Plan** at the top to review or change your weekly schedule — see
+  below.
 
-### About Tuesday/Thursday
+### Editing your weekly plan
 
-Your plan alternates each week between a Tabata circuit and a run, and
-Thursday mirrors whichever one you didn't do Tuesday. The app picks this
-automatically (alternating by calendar week), so it won't always match
-exactly what you end up doing — if you do something different, just note
-it in the "Notes" box for that entry, or use the Notes field freely.
+The **Plan** tab shows a card for each day of the week. From there you can:
+
+- Mark a day as a **rest day** (hides its exercise list)
+- Change the **session name, location, duration, or note** for a day
+- **Add an exercise** to a day from the dropdown (grouped by type: gym
+  strength, core, home cardio, warm-up/cool-down, flexible) — this list
+  reflects your gym's equipment and the kinds of sessions from your original
+  plan
+- **Remove** an exercise (✕), **reorder** exercises (↑ / ↓), or edit an
+  exercise's **target sets/reps**
+- **Copy** one day's whole plan onto another — handy since Tuesday/Thursday
+  used to auto-alternate between a Tabata circuit and a run; now that you
+  can edit them directly, that automatic swap is gone, so use Copy (or edit
+  by hand) whenever you want to switch which one you're doing that week
+- **Reset everything to the default plan** if you want to start over (this
+  only changes what's in the editor — nothing is applied until you tap
+  **Save schedule**)
+
+Nothing here affects the Today page until you tap **Save schedule**.
 
 ## Costs
 
@@ -106,11 +128,15 @@ person's workout log will ever use). No credit card is required for either.
 
 ## Making changes later
 
-- **Change the exercise plan or targets:** edit `js/plan.js` in this repo
-  (via the pencil/edit icon on GitHub, same as `config.js` above).
+- **Change your weekly schedule:** use the **Plan** tab in the app — no code
+  editing needed.
+- **Add a new type of exercise to the master list:** edit
+  `js/exercise-library.js` in this repo (via the pencil/edit icon on
+  GitHub) to add an entry, and add a matching diagram to `images/` if you
+  want one. It'll then show up in the Plan tab's "Add exercise" dropdown.
 - **Change how it looks:** edit `css/style.css`.
-- **Change/add a diagram:** replace or add an SVG file in `images/` and
-  point to it from `js/plan.js`.
+- **Change the built-in default plan** (used for "Reset to default" and
+  before you've customized anything): edit `js/plan.js`.
 
 Any change committed to the `main` branch updates the live site
 automatically within a minute or two.

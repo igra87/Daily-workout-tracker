@@ -388,3 +388,196 @@ details.data-table-toggle summary {
   font-size: 0.88rem;
   margin-bottom: 10px;
 }
+
+.note a {
+  color: var(--accent);
+}
+
+.plan-day-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.plan-day-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.plan-day-head h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.rest-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.plan-day-card .field {
+  margin-bottom: 10px;
+}
+
+.plan-field-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.plan-field-row .field {
+  margin-bottom: 0;
+}
+
+.plan-field-row .field {
+  flex: 1;
+  min-width: 100px;
+}
+
+.plan-day-card .field input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+.plan-day-card .field label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.plan-exercise-list {
+  margin: 12px 0;
+}
+
+.plan-exercise-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan-exercise-row:last-child {
+  border-bottom: none;
+}
+
+.exercise-icon-sm {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.plan-exercise-name {
+  flex: 1;
+  min-width: 90px;
+  font-size: 0.9rem;
+}
+
+.plan-target-input {
+  width: 130px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+button.reorder-btn, button.remove-btn {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+button.remove-btn {
+  color: #dc2626;
+}
+
+.empty-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.plan-add-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.plan-add-row select {
+  flex: 1;
+  min-width: 160px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+button.add-exercise-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.plan-copy-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  flex-wrap: wrap;
+}
+
+.plan-copy-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.plan-copy-row select {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+button.copy-from-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+}

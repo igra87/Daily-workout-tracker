@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Workout History</title>
+  <title>Weekly Plan</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -11,33 +11,40 @@
     <span class="brand">🏋️ Daily Workout</span>
     <div class="nav-links">
       <a href="index.html">Today</a>
+      <a href="history.html">History</a>
       <a href="progress.html">Progress</a>
-      <a href="plan.html">Plan</a>
     </div>
   </nav>
 
   <main class="container">
     <div id="setup-warning" class="setup-warning" style="display:none">
-      Setup needed: this app can't load your history yet because
+      Setup needed: this app can't load or save your plan yet because
       <code>js/config.js</code> still has placeholder Supabase values.
       See the README for the quick setup steps.
     </div>
 
     <header class="day-header">
-      <h1>History</h1>
-      <div class="session-meta">Everything you've logged, most recent first</div>
+      <h1>Weekly Plan</h1>
+      <div class="session-meta">
+        Add, remove, or reorder exercises for each day. Changes only take
+        effect on the Today page after you tap Save below.
+      </div>
+      <div class="note"><a href="#" id="reset-link">Reset everything to the default plan</a></div>
     </header>
 
-    <div class="history-controls">
-      <span id="entry-count" class="session-meta"></span>
-      <button class="csv-btn" id="csv-btn">Download CSV</button>
-    </div>
+    <div id="schedule-editor"></div>
 
-    <div id="history-content"></div>
+    <div class="save-bar" id="save-bar" style="display:none">
+      <button class="save-btn" id="save-btn">Save schedule</button>
+      <div class="status-msg" id="status-msg"></div>
+    </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>
-  <script src="js/history.js"></script>
+  <script src="js/exercise-library.js"></script>
+  <script src="js/plan.js"></script>
+  <script src="js/schedule-store.js"></script>
+  <script src="js/plan-editor.js"></script>
 </body>
 </html>

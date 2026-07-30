@@ -1,4 +1,4 @@
-(function () {
+(async function () {
   const isConfigured = SUPABASE_URL !== "YOUR_SUPABASE_URL" && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
   const db = isConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
@@ -6,8 +6,17 @@
     document.getElementById("setup-warning").style.display = "block";
   }
 
+  function escapeHtml(str) {
+    return String(str ?? "").replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+  }
+
   const today = new Date();
-  const plan = getPlanForDate(today);
+  const dayKey = DAY_KEYS[today.getDay()];
+  const schedule = await loadWeeklySchedule(db);
+  const dayPlan = schedule[dayKey];
+  const plan = { day: DAY_LABELS[dayKey], ...dayPlan };
   const dateStr = today.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 
   document.getElementById("day-title").textContent = `${plan.day} — ${plan.session}`;
@@ -31,17 +40,17 @@
     const card = document.createElement("div");
     card.className = "exercise-card";
     card.innerHTML = `
-      <img class="exercise-icon" src="${ex.image}" alt="${ex.name} diagram" />
+      <img class="exercise-icon" src="${escapeHtml(ex.image)}" alt="${escapeHtml(ex.name)} diagram" />
       <div class="exercise-body">
-        <h3>${ex.name}</h3>
-        <div class="exercise-target">Target: ${ex.target}</div>
+        <h3>${escapeHtml(ex.name)}</h3>
+        <div class="exercise-target">Target: ${escapeHtml(ex.target)}</div>
         <div class="exercise-inputs">
           <div class="field">
-            <label for="f1-${i}">${ex.field1}</label>
+            <label for="f1-${i}">${escapeHtml(ex.field1)}</label>
             <input id="f1-${i}" type="text" inputmode="decimal" />
           </div>
           <div class="field">
-            <label for="f2-${i}">${ex.field2}</label>
+            <label for="f2-${i}">${escapeHtml(ex.field2)}</label>
             <input id="f2-${i}" type="text" />
           </div>
         </div>
