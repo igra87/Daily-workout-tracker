@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Workout History</title>
+  <title>Workout Progress</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -11,32 +11,34 @@
     <span class="brand">🏋️ Daily Workout</span>
     <div class="nav-links">
       <a href="index.html">Today</a>
-      <a href="progress.html">Progress</a>
+      <a href="history.html">History</a>
     </div>
   </nav>
 
   <main class="container">
     <div id="setup-warning" class="setup-warning" style="display:none">
-      Setup needed: this app can't load your history yet because
+      Setup needed: this app can't load your progress yet because
       <code>js/config.js</code> still has placeholder Supabase values.
       See the README for the quick setup steps.
     </div>
 
     <header class="day-header">
-      <h1>History</h1>
-      <div class="session-meta">Everything you've logged, most recent first</div>
+      <h1>Progress</h1>
+      <div class="session-meta">Track one exercise over time</div>
     </header>
 
-    <div class="history-controls">
-      <span id="entry-count" class="session-meta"></span>
-      <button class="csv-btn" id="csv-btn">Download CSV</button>
+    <div class="filter-row">
+      <div class="field">
+        <label for="exercise-select">Exercise</label>
+        <select id="exercise-select"></select>
+      </div>
     </div>
 
-    <div id="history-content"></div>
+    <div id="chart-area"></div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>
-  <script src="js/history.js"></script>
+  <script src="js/progress.js"></script>
 </body>
 </html>

@@ -85,6 +85,10 @@ Both take a few minutes and only need to be done once.
 - Tap **History** at the top to see everything you've logged, most recent
   first, or tap **Download CSV** to get a spreadsheet file of everything
   (openable in Excel, Google Sheets, Numbers, etc.).
+- Tap **Progress** at the top, pick an exercise from the dropdown, and see a
+  graph of that exercise's logged values over time (e.g. weight for Leg
+  press, time held for Plank). Hover/tap a point for the exact date and
+  value; tap "Show data table" for the plain numbers underneath.
 
 ### About Tuesday/Thursday
 
