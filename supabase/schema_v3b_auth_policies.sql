@@ -7,8 +7,8 @@
 -- the UID you copied (keep the surrounding quotes).
 
 -- 1) Attach your existing rows to your new account.
-update workout_logs set user_id = 'YOUR_USER_ID_HERE' where user_id is null;
-update app_settings set user_id = 'YOUR_USER_ID_HERE' where user_id is null;
+update workout_logs set user_id = 'c6a0bed8-0821-458f-83ba-0949e6bb08fa' where user_id is null;
+update app_settings set user_id = 'c6a0bed8-0821-458f-83ba-0949e6bb08fa' where user_id is null;
 
 -- 2) Require every row to have an owner from now on.
 alter table workout_logs alter column user_id set not null;
