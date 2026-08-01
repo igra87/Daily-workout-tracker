@@ -136,9 +136,12 @@ There's a **Log out** link in the top-right of every page.
 - Open the link any day — it automatically shows that day's session based
   on the weekly plan, with a simple diagram and target sets/reps for each
   exercise.
-- Type the weight/reps (or time/distance, for cardio and core moves) you
-  actually did into the boxes next to each exercise. You only need to fill
-  in the ones you want to log — blank ones are skipped.
+- Type what you actually did into the two boxes next to each exercise —
+  the labels adapt to the exercise: **Amount + Reps/Sets** for weighted
+  machine/dumbbell exercises, **Duration + Distance** for runs, **Reps +
+  Sets** for bodyweight core moves, or a time-based field for things like
+  Plank. You only need to fill in what you want to log — blank ones are
+  skipped.
 - Tap **Save today's entries** once you're done. You can come back and save
   again later the same day if you add more.
 - Tap **History** at the top to see everything you've logged, most recent
@@ -175,6 +178,11 @@ The **Plan** tab shows a card for each day of the week. From there you can:
 - **Reset everything to the default plan** if you want to start over (this
   only changes what's in the editor — nothing is applied until you tap
   **Save schedule**)
+- **Sync exercise fields from library** refreshes each exercise's log-entry
+  field labels and diagram to match the current master list (matched by
+  name), without touching your target sets/reps. Use this after the app is
+  updated with new/changed exercise types, since your saved schedule keeps
+  its own copy of those details rather than looking them up live.
 
 Nothing here affects the Today page until you tap **Save schedule**.
 

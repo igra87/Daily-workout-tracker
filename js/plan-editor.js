@@ -146,6 +146,37 @@
     }
   });
 
+  document.getElementById("sync-fields-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    let updated = 0;
+    let unmatched = 0;
+    ORDERED_DAYS.forEach((dayKey) => {
+      schedule[dayKey].exercises.forEach((ex) => {
+        const item = EXERCISE_LIBRARY.find((lib) => lib.name === ex.name);
+        if (!item) {
+          unmatched++;
+          return;
+        }
+        if (ex.field1 !== item.field1 || ex.field2 !== item.field2 || ex.image !== item.image) {
+          ex.field1 = item.field1;
+          ex.field2 = item.field2;
+          ex.image = item.image;
+          updated++;
+        }
+      });
+    });
+    render();
+    const statusEl = document.getElementById("status-msg");
+    if (updated === 0 && unmatched === 0) {
+      statusEl.textContent = "Everything already matches the current library.";
+    } else {
+      statusEl.textContent = `Updated ${updated} exercise${updated === 1 ? "" : "s"} to match the library`
+        + (unmatched > 0 ? `; ${unmatched} no longer in the library were left as-is` : "")
+        + " — tap Save schedule to apply.";
+    }
+    statusEl.className = "status-msg";
+  });
+
   document.getElementById("reset-link").addEventListener("click", (e) => {
     e.preventDefault();
     if (!confirm("This replaces your current unsaved changes in the editor with the original default plan. Continue?")) return;
