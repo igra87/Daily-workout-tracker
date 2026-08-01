@@ -30,3 +30,10 @@ async function saveWeeklySchedule(db, schedule) {
     updated_at: new Date().toISOString(),
   });
 }
+
+// Schedules saved before the field1/field2 -> fields[] change may still be
+// in that older shape. This lets old data keep rendering correctly until
+// it's refreshed via the Plan tab's "Sync exercise fields from library".
+function getExerciseFields(ex) {
+  return ex.fields || [ex.field1, ex.field2].filter(Boolean);
+}

@@ -43,7 +43,11 @@ up.
    the **Plan** tab). This one *does* allow the app to update rows — that's
    needed so your schedule edits can be saved — but it's a separate table
    from your workout logs above, which stay insert/read-only.
-7. Now click the **Settings** (gear icon) in the left sidebar, then **API**.
+7. Click **New query** once more, open **`supabase/schema_v4_third_field.sql`**,
+   paste it in, and click **Run**. This adds one more column pair used by
+   weighted exercises, which log three things (Amount, Reps, Sets) instead
+   of two.
+8. Now click the **Settings** (gear icon) in the left sidebar, then **API**.
    You'll see two values you need:
    - **Project URL** — looks like `https://xxxxxxxxxxxx.supabase.co`
    - **anon public** key — a long string of letters/numbers
@@ -136,12 +140,12 @@ There's a **Log out** link in the top-right of every page.
 - Open the link any day — it automatically shows that day's session based
   on the weekly plan, with a simple diagram and target sets/reps for each
   exercise.
-- Type what you actually did into the two boxes next to each exercise —
-  the labels adapt to the exercise: **Amount + Reps/Sets** for weighted
-  machine/dumbbell exercises, **Duration + Distance** for runs, **Reps +
-  Sets** for bodyweight core moves, or a time-based field for things like
-  Plank. You only need to fill in what you want to log — blank ones are
-  skipped.
+- Type what you actually did into the boxes next to each exercise — they
+  adapt to the exercise: **Amount + Reps + Sets** (three boxes) for
+  weighted machine/dumbbell exercises, **Duration + Distance** for runs,
+  **Reps + Sets** for bodyweight core moves, or a time-based field for
+  things like Plank. You only need to fill in what you want to log — blank
+  ones are skipped.
 - Tap **Save today's entries** once you're done. You can come back and save
   again later the same day if you add more.
 - Tap **History** at the top to see everything you've logged, most recent

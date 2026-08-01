@@ -119,7 +119,7 @@
       const id = card.querySelector(".add-exercise-select").value;
       const item = EXERCISE_LIBRARY.find((x) => x.id === id);
       if (item) {
-        day.exercises.push({ name: item.name, target: item.defaultTarget, image: item.image, field1: item.field1, field2: item.field2 });
+        day.exercises.push({ name: item.name, target: item.defaultTarget, image: item.image, fields: item.fields.slice() });
         render();
       }
     } else if (action === "remove") {
@@ -157,9 +157,12 @@
           unmatched++;
           return;
         }
-        if (ex.field1 !== item.field1 || ex.field2 !== item.field2 || ex.image !== item.image) {
-          ex.field1 = item.field1;
-          ex.field2 = item.field2;
+        const currentFields = getExerciseFields(ex);
+        const fieldsChanged = JSON.stringify(currentFields) !== JSON.stringify(item.fields) || ex.image !== item.image;
+        if (fieldsChanged) {
+          ex.fields = item.fields.slice();
+          delete ex.field1;
+          delete ex.field2;
           ex.image = item.image;
           updated++;
         }

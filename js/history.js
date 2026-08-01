@@ -36,6 +36,7 @@
         <td>${escapeHtml(r.exercise_name)}</td>
         <td>${escapeHtml(r.field1_label)}: ${escapeHtml(r.value1) || "—"}</td>
         <td>${escapeHtml(r.field2_label)}: ${escapeHtml(r.value2) || "—"}</td>
+        <td>${r.field3_label ? `${escapeHtml(r.field3_label)}: ${escapeHtml(r.value3) || "—"}` : "—"}</td>
       </tr>`).join("");
 
     contentEl.innerHTML = `
@@ -43,7 +44,7 @@
         <table class="history-table">
           <thead>
             <tr>
-              <th>Date</th><th>Day</th><th>Session</th><th>Exercise</th><th>Detail 1</th><th>Detail 2</th>
+              <th>Date</th><th>Day</th><th>Session</th><th>Exercise</th><th>Detail 1</th><th>Detail 2</th><th>Detail 3</th>
             </tr>
           </thead>
           <tbody>${tableRows}</tbody>
@@ -52,7 +53,7 @@
   }
 
   function toCsv() {
-    const headers = ["entry_date", "day_name", "session_name", "exercise_name", "field1_label", "value1", "field2_label", "value2", "created_at"];
+    const headers = ["entry_date", "day_name", "session_name", "exercise_name", "field1_label", "value1", "field2_label", "value2", "field3_label", "value3", "created_at"];
     const escapeCsv = (v) => {
       const s = String(v ?? "");
       return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;

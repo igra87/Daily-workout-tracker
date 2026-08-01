@@ -225,6 +225,10 @@ button.timer-reset {
   flex-wrap: wrap;
 }
 
+.exercise-inputs .field {
+  min-width: 85px;
+}
+
 .field {
   display: flex;
   flex-direction: column;

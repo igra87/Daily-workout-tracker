@@ -10,8 +10,7 @@ function pick(id, targetOverride) {
     name: item.name,
     target: targetOverride || item.defaultTarget,
     image: item.image,
-    field1: item.field1,
-    field2: item.field2,
+    fields: item.fields.slice(),
   };
 }
 

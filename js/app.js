@@ -36,6 +36,13 @@
   }
 
   plan.exercises.forEach((ex, i) => {
+    const fields = getExerciseFields(ex);
+    const inputsHtml = fields.map((label, fi) => `
+      <div class="field">
+        <label for="f${fi + 1}-${i}">${escapeHtml(label)}</label>
+        <input id="f${fi + 1}-${i}" type="text" ${fi === 0 ? 'inputmode="decimal"' : ""} />
+      </div>`).join("");
+
     const card = document.createElement("div");
     card.className = "exercise-card";
     card.innerHTML = `
@@ -43,16 +50,7 @@
       <div class="exercise-body">
         <h3>${escapeHtml(ex.name)}</h3>
         <div class="exercise-target">Target: ${escapeHtml(ex.target)}</div>
-        <div class="exercise-inputs">
-          <div class="field">
-            <label for="f1-${i}">${escapeHtml(ex.field1)}</label>
-            <input id="f1-${i}" type="text" inputmode="decimal" />
-          </div>
-          <div class="field">
-            <label for="f2-${i}">${escapeHtml(ex.field2)}</label>
-            <input id="f2-${i}" type="text" />
-          </div>
-        </div>
+        <div class="exercise-inputs">${inputsHtml}</div>
       </div>`;
     listEl.appendChild(card);
   });
@@ -72,19 +70,21 @@
     const rows = [];
 
     plan.exercises.forEach((ex, i) => {
-      const v1 = document.getElementById(`f1-${i}`).value.trim();
-      const v2 = document.getElementById(`f2-${i}`).value.trim();
-      if (!v1 && !v2) return; // skip untouched rows
-      rows.push({
+      const fields = getExerciseFields(ex);
+      const values = fields.map((_, fi) => document.getElementById(`f${fi + 1}-${i}`).value.trim());
+      if (!values.some(Boolean)) return; // skip untouched rows
+
+      const row = {
         entry_date: entryDate,
         day_name: plan.day,
         session_name: plan.session,
         exercise_name: ex.name,
-        field1_label: ex.field1,
-        value1: v1,
-        field2_label: ex.field2,
-        value2: v2,
+      };
+      fields.forEach((label, fi) => {
+        row[`field${fi + 1}_label`] = label;
+        row[`value${fi + 1}`] = values[fi];
       });
+      rows.push(row);
     });
 
     if (rows.length === 0) {
