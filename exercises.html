@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Exercise Library</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="topnav">
+    <span class="brand">🏋️ Daily Workout</span>
+    <div class="nav-links">
+      <a href="index.html">Today</a>
+      <a href="history.html">History</a>
+      <a href="progress.html">Progress</a>
+      <a href="plan.html">Plan</a>
+    </div>
+  </nav>
+  <div class="user-bar" id="user-bar"></div>
+
+  <main class="container">
+    <div id="setup-warning" class="setup-warning" style="display:none">
+      Setup needed: this app can't save custom exercises yet because
+      <code>js/config.js</code> still has placeholder Supabase values.
+      See the README for the quick setup steps.
+    </div>
+
+    <header class="day-header">
+      <h1>Exercise Library</h1>
+      <div class="session-meta">
+        Add your own exercises here so they show up when adding exercises in
+        the Plan and Today tabs.
+      </div>
+    </header>
+
+    <form id="add-exercise-form" class="exercise-form">
+      <div class="field">
+        <label for="ex-name">Exercise name</label>
+        <input type="text" id="ex-name" required />
+      </div>
+
+      <div class="plan-field-row">
+        <div class="field">
+          <label for="ex-category">Category</label>
+          <select id="ex-category"></select>
+        </div>
+        <div class="field">
+          <label for="ex-target">Default target (optional)</label>
+          <input type="text" id="ex-target" placeholder="e.g. 3 x 12" />
+        </div>
+      </div>
+
+      <div class="plan-field-row">
+        <div class="field">
+          <label for="ex-field1">Log field 1</label>
+          <input type="text" id="ex-field1" placeholder="e.g. Amount" required />
+        </div>
+        <div class="field">
+          <label for="ex-field2">Log field 2</label>
+          <input type="text" id="ex-field2" placeholder="e.g. Reps" required />
+        </div>
+      </div>
+
+      <div id="field3-row" class="field" style="display:none">
+        <label for="ex-field3">Log field 3</label>
+        <input type="text" id="ex-field3" placeholder="e.g. Sets" />
+      </div>
+
+      <a href="#" id="add-field3-link" class="toggle-mode-link">+ Add a third log field</a>
+
+      <div class="plan-field-row">
+        <div class="field">
+          <label for="ex-icon">Diagram (optional)</label>
+          <select id="ex-icon"></select>
+        </div>
+        <div class="icon-preview-wrap">
+          <img id="ex-icon-preview" class="exercise-icon" src="images/generic-exercise.svg" alt="Preview" />
+        </div>
+      </div>
+
+      <button type="submit" class="save-btn">Add exercise</button>
+      <div class="status-msg" id="status-msg"></div>
+    </form>
+
+    <h2 class="section-heading">Your custom exercises</h2>
+    <div id="custom-list"></div>
+
+    <details class="data-table-toggle">
+      <summary>Show built-in exercises already available</summary>
+      <div id="builtin-list"></div>
+    </details>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth-guard.js"></script>
+  <script src="js/exercise-library.js"></script>
+  <script src="js/custom-exercises-store.js"></script>
+  <script src="js/exercises-editor.js"></script>
+</body>
+</html>

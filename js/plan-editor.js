@@ -10,16 +10,8 @@
     }[c]));
   }
 
-  const libraryOptionsHtml = (() => {
-    const byCategory = {};
-    EXERCISE_LIBRARY.forEach((item) => {
-      (byCategory[item.category] = byCategory[item.category] || []).push(item);
-    });
-    return Object.entries(byCategory).map(([cat, items]) => `
-      <optgroup label="${escapeHtml(cat)}">
-        ${items.map((i) => `<option value="${escapeHtml(i.id)}">${escapeHtml(i.name)}</option>`).join("")}
-      </optgroup>`).join("");
-  })();
+  let fullLibrary = EXERCISE_LIBRARY;
+  let libraryOptionsHtml = buildExerciseOptionsHtml(fullLibrary);
 
   function renderDayCard(dayKey) {
     const day = schedule[dayKey];
@@ -117,7 +109,7 @@
 
     if (action === "add") {
       const id = card.querySelector(".add-exercise-select").value;
-      const item = EXERCISE_LIBRARY.find((x) => x.id === id);
+      const item = fullLibrary.find((x) => x.id === id);
       if (item) {
         day.exercises.push({ name: item.name, target: item.defaultTarget, image: item.image, fields: item.fields.slice() });
         render();
@@ -152,7 +144,7 @@
     let unmatched = 0;
     ORDERED_DAYS.forEach((dayKey) => {
       schedule[dayKey].exercises.forEach((ex) => {
-        const item = EXERCISE_LIBRARY.find((lib) => lib.name === ex.name);
+        const item = fullLibrary.find((lib) => lib.name === ex.name);
         if (!item) {
           unmatched++;
           return;
@@ -217,6 +209,10 @@
       return;
     }
     if (!(await requireAuth())) return;
+
+    const customExercises = await loadCustomExercises(db);
+    fullLibrary = getFullExerciseLibrary(customExercises);
+    libraryOptionsHtml = buildExerciseOptionsHtml(fullLibrary);
 
     schedule = await loadWeeklySchedule(db);
     render();

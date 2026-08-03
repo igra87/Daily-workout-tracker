@@ -18,6 +18,9 @@
   const plan = { day: DAY_LABELS[dayKey], ...dayPlan };
   const dateStr = today.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 
+  const customExercises = isConfigured ? await loadCustomExercises(db) : [];
+  const fullLibrary = getFullExerciseLibrary(customExercises);
+
   document.getElementById("day-title").textContent = `${plan.day} — ${plan.session}`;
   document.getElementById("session-meta").textContent =
     [dateStr, plan.location, plan.duration].filter(Boolean).join(" · ");
@@ -32,27 +35,63 @@
         <img class="exercise-icon" src="images/rest.svg" alt="Rest day" />
         <p>Rest day — no session planned today.</p>
       </div>`;
-    return; // nothing to log, save bar stays hidden
   }
 
-  plan.exercises.forEach((ex, i) => {
-    const fields = getExerciseFields(ex);
-    const inputsHtml = fields.map((label, fi) => `
-      <div class="field">
-        <label for="f${fi + 1}-${i}">${escapeHtml(label)}</label>
-        <input id="f${fi + 1}-${i}" type="text" ${fi === 0 ? 'inputmode="decimal"' : ""} />
-      </div>`).join("");
+  // Today's working list of exercises: starts as a copy of the plan, and
+  // can grow with ad-hoc additions that aren't part of the saved schedule.
+  const todaysExercises = plan.isRest ? [] : plan.exercises.map((ex) => ({ ...ex }));
 
-    const card = document.createElement("div");
-    card.className = "exercise-card";
-    card.innerHTML = `
-      <img class="exercise-icon" src="${escapeHtml(ex.image)}" alt="${escapeHtml(ex.name)} diagram" />
-      <div class="exercise-body">
-        <h3>${escapeHtml(ex.name)}</h3>
-        <div class="exercise-target">Target: ${escapeHtml(ex.target)}</div>
-        <div class="exercise-inputs">${inputsHtml}</div>
-      </div>`;
-    listEl.appendChild(card);
+  function renderExerciseList() {
+    if (plan.isRest && todaysExercises.length === 0) return; // rest-day card already shown, nothing else to render
+
+    listEl.innerHTML = "";
+    todaysExercises.forEach((ex, i) => {
+      const fields = getExerciseFields(ex);
+      const inputsHtml = fields.map((label, fi) => `
+        <div class="field">
+          <label for="f${fi + 1}-${i}">${escapeHtml(label)}</label>
+          <input id="f${fi + 1}-${i}" type="text" ${fi === 0 ? 'inputmode="decimal"' : ""} />
+        </div>`).join("");
+
+      const card = document.createElement("div");
+      card.className = "exercise-card";
+      card.innerHTML = `
+        <img class="exercise-icon" src="${escapeHtml(ex.image)}" alt="${escapeHtml(ex.name)} diagram" />
+        <div class="exercise-body">
+          <h3>${escapeHtml(ex.name)}</h3>
+          <div class="exercise-target">Target: ${escapeHtml(ex.target)}</div>
+          <div class="exercise-inputs">${inputsHtml}</div>
+          ${ex.isAdHoc ? `<button type="button" class="remove-custom-btn remove-oneoff-btn" data-idx="${i}">✕ Remove</button>` : ""}
+        </div>`;
+      listEl.appendChild(card);
+    });
+  }
+
+  renderExerciseList();
+
+  listEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".remove-oneoff-btn");
+    if (!btn) return;
+    todaysExercises.splice(parseInt(btn.getAttribute("data-idx"), 10), 1);
+    renderExerciseList();
+  });
+
+  const oneoffRow = document.getElementById("oneoff-add-row");
+  const oneoffSelect = document.getElementById("oneoff-select");
+  oneoffSelect.innerHTML = buildExerciseOptionsHtml(fullLibrary);
+  oneoffRow.style.display = "block";
+
+  document.getElementById("oneoff-add-btn").addEventListener("click", () => {
+    const item = fullLibrary.find((x) => x.id === oneoffSelect.value);
+    if (!item) return;
+    todaysExercises.push({
+      name: item.name,
+      target: item.defaultTarget,
+      image: item.image,
+      fields: item.fields.slice(),
+      isAdHoc: true,
+    });
+    renderExerciseList();
   });
 
   saveBar.style.display = "block";
@@ -69,7 +108,7 @@
     const entryDate = today.toISOString().slice(0, 10);
     const rows = [];
 
-    plan.exercises.forEach((ex, i) => {
+    todaysExercises.forEach((ex, i) => {
       const fields = getExerciseFields(ex);
       const values = fields.map((_, fi) => document.getElementById(`f${fi + 1}-${i}`).value.trim());
       if (!values.some(Boolean)) return; // skip untouched rows

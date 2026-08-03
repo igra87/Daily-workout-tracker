@@ -146,6 +146,11 @@ There's a **Log out** link in the top-right of every page.
   **Reps + Sets** for bodyweight core moves, or a time-based field for
   things like Plank. You only need to fill in what you want to log — blank
   ones are skipped.
+- Did something that's not on today's plan? Use the **"Add to today"**
+  picker below the exercise list to log an extra exercise (from the same
+  library used by the Plan tab) just for today — it doesn't change your
+  saved weekly schedule, and you can remove it again with the ✕ button if
+  you added it by mistake. This also works on rest days.
 - Tap **Save today's entries** once you're done. You can come back and save
   again later the same day if you add more.
 - Tap **History** at the top to see everything you've logged, most recent
@@ -157,6 +162,8 @@ There's a **Log out** link in the top-right of every page.
   value; tap "Show data table" for the plain numbers underneath.
 - Tap **Plan** at the top to review or change your weekly schedule — see
   below.
+- Tap **Exercises** at the top to add your own exercises to the library —
+  see below.
 - The timer near the top of the Today page stays visible as you scroll.
   Tap **Start**/**Stop** to time a hold (e.g. a plank) and read off the
   elapsed time to log; tap **20s** or **10s** for a Tabata-style countdown
@@ -189,6 +196,26 @@ The **Plan** tab shows a card for each day of the week. From there you can:
   its own copy of those details rather than looking them up live.
 
 Nothing here affects the Today page until you tap **Save schedule**.
+
+### Adding new exercises to the library
+
+The **Exercises** tab lets you add your own exercises so they show up
+alongside the built-in ones in the Plan tab's "Add exercise" dropdown and
+Today's "Add to today" picker. For each one you set:
+
+- **Name** and **category** (used for grouping in the dropdowns)
+- **Log fields** — the labels for the two (or three, via "+ Add a third log
+  field") input boxes shown when logging it, e.g. "Amount" / "Reps" /
+  "Sets", or "Duration" / "Distance"
+- An optional **default target** text (e.g. "3 x 12") and an optional
+  **diagram**, picked from the app's existing set of illustrations (or left
+  as a generic placeholder)
+
+Exercises you add here are personal to your account. You can remove one
+with its **Remove** button — that only affects future additions from the
+picker, it won't change any day that already has it added. A collapsible
+list at the bottom shows the built-in exercises already available, so you
+can check before adding a duplicate.
 
 ## Costs
 

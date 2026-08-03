@@ -40,9 +40,11 @@ body {
 
 nav.topnav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
+  row-gap: 6px;
+  padding: 12px 16px;
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -59,12 +61,13 @@ nav.topnav a {
   color: var(--accent);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
 }
 
 nav.topnav .nav-links {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .user-bar {
@@ -112,7 +115,7 @@ header.day-header .session-meta {
 
 .timer-card {
   position: sticky;
-  top: 53px;
+  top: 68px;
   z-index: 8;
   display: flex;
   flex-direction: column;
@@ -331,6 +334,63 @@ button.save-btn:active {
   color: var(--accent);
   font-size: 0.88rem;
   text-decoration: none;
+}
+
+.exercise-form {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exercise-form .field input,
+.exercise-form .field select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+.exercise-form .field label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.icon-preview-wrap {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 9px;
+}
+
+.section-heading {
+  font-size: 1.1rem;
+  margin: 24px 0 10px;
+}
+
+.remove-custom-btn {
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+#builtin-list p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 6px 0;
 }
 
 .setup-warning {
