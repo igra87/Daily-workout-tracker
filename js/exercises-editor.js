@@ -6,6 +6,8 @@
     { value: "images/leg-press.svg", label: "Leg press" },
     { value: "images/seated-row.svg", label: "Seated row" },
     { value: "images/bench-press.svg", label: "Bench press" },
+    { value: "images/incline-dumbbell-press.svg", label: "Incline dumbbell press" },
+    { value: "images/dumbbell-fly.svg", label: "Dumbbell fly" },
     { value: "images/shoulder-press.svg", label: "Shoulder press" },
     { value: "images/plank.svg", label: "Plank" },
     { value: "images/squat.svg", label: "Squat" },

@@ -11,6 +11,8 @@ const EXERCISE_LIBRARY = [
   { id: "leg-press", name: "Leg press machine", category: "Gym strength", image: "images/leg-press.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
   { id: "seated-row", name: "Seated row machine", category: "Gym strength", image: "images/seated-row.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
   { id: "bench-press", name: "Dumbbell bench press (flat bench)", category: "Gym strength", image: "images/bench-press.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
+  { id: "incline-dumbbell-press", name: "Incline dumbbell bench press", category: "Gym strength", image: "images/incline-dumbbell-press.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 10" },
+  { id: "dumbbell-fly", name: "Lying dumbbell fly (flat bench)", category: "Gym strength", image: "images/dumbbell-fly.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
   { id: "shoulder-press", name: "Shoulder press machine", category: "Gym strength", image: "images/shoulder-press.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 10" },
   { id: "leg-curl", name: "Leg curl machine", category: "Gym strength", image: "images/leg-machine.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
   { id: "leg-extension", name: "Leg extension machine", category: "Gym strength", image: "images/leg-machine.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
