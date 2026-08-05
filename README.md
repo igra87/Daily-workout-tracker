@@ -129,6 +129,30 @@ From now on, sharing the app is just sharing the link: each friend opens
 it, taps **Sign up**, and gets their own private schedule and history.
 There's a **Log out** link in the top-right of every page.
 
+## Install it on your phone (optional, but recommended)
+
+The app can be added to your phone's home screen like a real app — its own
+icon, opens full-screen with no browser address bar, and loads instantly.
+No App Store needed; this uses a standard web feature every phone
+supports.
+
+**iPhone (Safari):**
+1. Open the app link in **Safari** (must be Safari, not Chrome, for this to
+   work on iPhone).
+2. Tap the **Share** button (square with an arrow, in the bottom toolbar).
+3. Scroll down and tap **Add to Home Screen**, then **Add**.
+
+**Android (Chrome):**
+1. Open the app link in **Chrome**.
+2. Tap the **⋮** menu (top right).
+3. Tap **Add to Home screen** (or you may see an **Install app** prompt
+   appear automatically) — then confirm.
+
+Either way, you'll get a workout-icon shortcut on your home screen. Opening
+it from there feels like a native app, and each of the 5 tabs still works
+the same way. Do this once per phone (yours, and each friend's, if they
+want it).
+
 ---
 
 ## Using the app
