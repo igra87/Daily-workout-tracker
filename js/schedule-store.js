@@ -24,7 +24,9 @@ async function loadWeeklySchedule(db) {
 }
 
 async function saveWeeklySchedule(db, schedule) {
+  const { data: { user } } = await db.auth.getUser();
   return db.from("app_settings").upsert({
+    user_id: user.id,
     key: "weekly_schedule",
     value: schedule,
     updated_at: new Date().toISOString(),

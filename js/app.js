@@ -1,8 +1,11 @@
 (async function () {
+  let userId = null;
   if (!isConfigured) {
     document.getElementById("setup-warning").style.display = "block";
-  } else if (!(await requireAuth())) {
-    return; // requireAuth() is already redirecting to the login page
+  } else {
+    const session = await requireAuth();
+    if (!session) return; // requireAuth() is already redirecting to the login page
+    userId = session.user.id;
   }
 
   function escapeHtml(str) {
@@ -114,6 +117,7 @@
       if (!values.some(Boolean)) return; // skip untouched rows
 
       const row = {
+        user_id: userId,
         entry_date: entryDate,
         day_name: plan.day,
         session_name: plan.session,

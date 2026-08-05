@@ -21,7 +21,9 @@ async function loadCustomExercises(db) {
 }
 
 async function saveCustomExercises(db, list) {
+  const { data: { user } } = await db.auth.getUser();
   return db.from("app_settings").upsert({
+    user_id: user.id,
     key: "custom_exercises",
     value: list,
     updated_at: new Date().toISOString(),
