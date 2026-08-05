@@ -1,10 +1,15 @@
-// Caches the app's own files (HTML/CSS/JS/icons) so the app opens instantly
-// from the home screen, even on a flaky connection. Anything cross-origin
-// (the Supabase API calls, the supabase-js CDN script) is left alone and
-// always goes straight to the network -- your actual data is never cached
-// here, only the app shell itself.
+// Caches the app's own files (HTML/CSS/JS/icons) purely as an offline
+// fallback, so the app can still open if you're briefly offline. Anything
+// cross-origin (Supabase API calls, the supabase-js CDN script) is left
+// alone and always goes straight to the network -- your actual data is
+// never cached here, only the app shell itself.
+//
+// Network-first: whenever you're online, you always get the current code
+// straight from the server (important since this app is still actively
+// being updated) -- the cache is only ever used as a fallback if a fetch
+// fails outright.
 
-const CACHE_NAME = "workout-tracker-v1";
+const CACHE_NAME = "workout-tracker-v2";
 const PRECACHE_URLS = [
   "index.html", "history.html", "progress.html", "plan.html", "exercises.html", "login.html",
   "css/style.css",
@@ -16,9 +21,17 @@ const PRECACHE_URLS = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .catch(() => {}) // don't fail install if e.g. offline on first visit
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        // { cache: "reload" } bypasses the browser's own HTTP cache, so this
+        // always pulls genuinely fresh files rather than a stale local copy.
+        PRECACHE_URLS.map((url) =>
+          fetch(url, { cache: "reload" })
+            .then((res) => { if (res.ok) return cache.put(url, res); })
+            .catch(() => {})
+        )
+      )
+    )
   );
   self.skipWaiting();
 });
@@ -37,14 +50,11 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
 
   event.respondWith(
-    caches.match(req).then((cached) => {
-      const network = fetch(req)
-        .then((res) => {
-          if (res.ok) caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
-          return res;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    fetch(req)
+      .then((res) => {
+        if (res.ok) caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
+        return res;
+      })
+      .catch(() => caches.match(req))
   );
 });
