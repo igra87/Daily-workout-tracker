@@ -19,6 +19,8 @@
     { value: "images/lat-pulldown.svg", label: "Lat pulldown" },
     { value: "images/incline-press.svg", label: "Incline/flat press" },
     { value: "images/lateral-raise.svg", label: "Lateral raise" },
+    { value: "images/bicep-curl.svg", label: "Bicep curl" },
+    { value: "images/tricep-extension.svg", label: "Tricep extension" },
     { value: "images/woodchop.svg", label: "Woodchop / Pallof press" },
     { value: "images/bicycle-crunch.svg", label: "Bicycle crunch" },
     { value: "images/leg-raise.svg", label: "Leg raise" },

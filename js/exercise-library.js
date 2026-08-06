@@ -19,6 +19,8 @@ const EXERCISE_LIBRARY = [
   { id: "lat-pulldown", name: "Lat pulldown", category: "Gym strength", image: "images/lat-pulldown.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
   { id: "incline-press", name: "Fixed-weight bar incline/flat press", category: "Gym strength", image: "images/incline-press.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 10" },
   { id: "lateral-raise", name: "Dumbbell lateral raises", category: "Gym strength", image: "images/lateral-raise.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
+  { id: "bicep-curl", name: "Dumbbell bicep curl", category: "Gym strength", image: "images/bicep-curl.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
+  { id: "tricep-extension", name: "Overhead dumbbell tricep extension", category: "Gym strength", image: "images/tricep-extension.svg", fields: ["Amount", "Reps", "Sets"], defaultTarget: "3 x 12" },
 
   { id: "plank", name: "Plank", category: "Core", image: "images/plank.svg", fields: ["Time held (sec)", "Sets"], defaultTarget: "3 x 30–40 sec" },
   { id: "woodchop", name: "Cable woodchop / Pallof press", category: "Core", image: "images/woodchop.svg", fields: ["Amount", "Reps/side", "Sets"], defaultTarget: "2 x 12/side" },
